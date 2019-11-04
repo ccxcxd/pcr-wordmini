@@ -24,6 +24,7 @@
         </div>
         <div>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#settings_modal">设定/Settings</button>
+            <button type="button" class="btn btn-secondary" id="export_btn">导出&amp;导入/Export&amp;Import</button>
         </div>
         <hr>
         <div id="char_table">
@@ -66,6 +67,20 @@
                             </thead>
                             <tbody></tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="import_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        可以复制粘贴到Excel进行编辑，然后复制粘贴回来导入。支持部分导入（只看ID）。<br/>
+                        Can copy-paste to Excel to edit, and then copy-paste back to import. Support partial import (only ID matters).<br/>
+                        <textarea class="form-control" id="import_text" rows="20"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="import_btn">导入/Import</button>
                     </div>
                 </div>
             </div>

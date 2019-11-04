@@ -3,6 +3,7 @@ $(document).ready(function () {
     var char_data = JSON.parse($('#char_data').text());
     word_data = JSON.parse($('#word_data').text());
     
+    // Main window
     var pre_col = 1;
     $.each(char_data, function (char_id, data) {
         if (data.col < pre_col) {
@@ -23,6 +24,7 @@ $(document).ready(function () {
         );
     });
     
+    // Settings window
     $.each(word_data, function (index, data) {
         $("<tr>").append(
             $("<td>").text(data.id),
@@ -35,6 +37,65 @@ $(document).ready(function () {
         ).appendTo("#settings_table");
     });
     new Tablesort(document.getElementById("settings_table"));
+    
+    // Export/Impoer window
+    $("#export_btn").click(function () {
+        var out_text = "";
+        $.each(word_data, function (index, data) {
+            var data_array = [data.id, data.word, data.first, data.last];
+            data_array.push(load_storage("grey", index, false).toString().toUpperCase());
+            data_array.push(load_storage("hide", index, false).toString().toUpperCase());
+            data_array.push(load_storage("highlight", index, false).toString().toUpperCase());
+            out_text += data_array.join('\t') + "\n";
+        });
+        $("#import_text").val(out_text);
+        $("#import_modal").modal();
+    });
+    
+    $("#import_btn").click(function () {
+        var in_text = $("#import_text").val();
+        var lines = in_text.split(/\r\n|\n/);
+        for (var i = 0; i < lines.length; i++) {
+            var line_string = lines[i];
+            if (line_string === "")
+                continue;
+            var line = line_string.split(/\t|,/);
+            if (line.length < 7) {
+                alert("无效数据/Invalid data: " + line_string);
+                return;
+            }
+            var word_id = parseInt(line[0]);
+            if (word_id === NaN || word_id < 1 || word_id > word_data.length) {
+                alert("无效数据/Invalid data: " + line_string);
+                return;
+            }
+            var index = word_id - 1;  // atlas ID 1 => array index 0
+            
+            // Returns true if success
+            var processValue = function(index, string_val, id_prefix) {
+                var val;
+                if (string_val.toLowerCase() === "true") {
+                    val = true;
+                } else if (string_val.toLowerCase() === "false") {
+                    val = false;
+                } else {
+                    return false;
+                }
+                $("#" + id_prefix + i).prop("data-checked", val);
+                return true;
+            };
+            if (!processValue(index, line[4], "button_grey") ||
+                !processValue(index, line[5], "button_hide") ||
+                !processValue(index, line[6], "button_highlight")) {
+                alert("无效数据/Invalid data: " + line_string);
+                return;
+            }
+        }
+        save_storage("grey", "button_grey");
+        save_storage("hide", "button_hide");
+        save_storage("highlight", "button_highlight");
+        location.reload();
+    });
 });
 
 // Popup the window and show all pictures for a character
