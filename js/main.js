@@ -101,7 +101,6 @@ $(document).ready(function () {
 // Popup the window and show all pictures for a character
 function popup(char_id) {
     $("#img_title").text(char_id);
-    $("#img_holder_highlight").empty();
     $("#img_holder").empty();
     $("#img_holder_grey").empty();
     $.each(word_data, function (index, data) {
@@ -113,8 +112,10 @@ function popup(char_id) {
             };
             
             if (load_storage("highlight", index, false)) {
-                img_obj.addClass("pic-highlight").appendTo("#img_holder_highlight");
-            } else if (load_storage("grey", index, false)) {
+                img_obj.addClass("pic-highlight");
+            }
+            
+            if (load_storage("grey", index, false)) {
                 img_obj.addClass("half-transparent").click(onclick).appendTo("#img_holder_grey");
             } else {
                 img_obj.click(onclick).appendTo("#img_holder");
