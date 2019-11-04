@@ -1,0 +1,8 @@
+.button-fixedsize {
+  height: 40px;
+  width: 100px;
+}
+
+.half-transparent {
+  opacity: 0.5;
+}

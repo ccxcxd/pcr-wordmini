@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>PCR填词游戏</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- <link href="css/styles.css" rel="stylesheet"> -->
+    <link href="css/styles.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/tablesort/5.0.2/tablesort.min.js"></script>
@@ -15,9 +15,19 @@
 </head>
 <body>
     <div class="container">
+        <div>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#settings_modal">设定/設定/Settings</button>
+        </div>
+        <hr>
         <div id="char_table">
         </div>
-        <div class="modal fade" id="img_modal" tabindex="-1" role="dialog" aria-labelledby="img_title" aria-hidden="true">
+        <hr>
+        <div>
+            Site made by 电脑小龟L.T.(CCX_CX_D).<br/>
+            Source code (welcome to edit): <a href="https://github.com/ccxcxd/">https://github.com/ccxcxd/</a><br/>
+            Thank esterTion for the <a href="https://redive.estertion.win/%E4%B8%80%E4%B8%AA%E9%A1%B6%E4%BF%A9.htm">data</a>. 
+        </div>
+        <div class="modal" id="img_modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -25,6 +35,28 @@
                     </div>
                     <div class="modal-body">
                         <div id="img_holder"></div>
+                        <div id="img_holder_grey"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="settings_modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <table class="table borderless" id="settings_table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>词/Word</th>
+                                    <th>词首/First</th>
+                                    <th>词尾/Last</th>
+                                    <th>变暗/Grey</th>
+                                    <th>隐藏/Hide</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
                     </div>
                 </div>
             </div>
