@@ -31,6 +31,7 @@ $(document).ready(function () {
             $("<td>").text(data.last),
             $("<td>").append(create_check_button("button_grey", index, "grey", false)),
             $("<td>").append(create_check_button("button_hide", index, "hide", false)),
+            $("<td>").append(create_check_button("button_highlight", index, "highlight", false)),
         ).appendTo("#settings_table");
     });
     new Tablesort(document.getElementById("settings_table"));
@@ -39,19 +40,23 @@ $(document).ready(function () {
 // Popup the window and show all pictures for a character
 function popup(char_id) {
     $("#img_title").text(char_id);
+    $("#img_holder_highlight").empty();
     $("#img_holder").empty();
     $("#img_holder_grey").empty();
     $.each(word_data, function (index, data) {
         if (data.first === char_id && !load_storage("hide", index, false)) {
-            var path = "img/" + data.pic + ".png";
+            var img_obj = $("<img>", { src: "img/" + data.pic + ".png" });
             var onclick = function () {
                 $("#button_grey" + index).click();
                 popup(char_id);
             };
-            if (load_storage("grey", index, false)) {
-                $("#img_holder_grey").append($("<img>", { src: path, "class": "half-transparent" }).click(onclick));
+            
+            if (load_storage("highlight", index, false)) {
+                img_obj.addClass("pic-highlight").appendTo("#img_holder_highlight");
+            } else if (load_storage("grey", index, false)) {
+                img_obj.addClass("half-transparent").click(onclick).appendTo("#img_holder_grey");
             } else {
-                $("#img_holder").append($("<img>", { src: path }).click(onclick));
+                img_obj.click(onclick).appendTo("#img_holder");
             }
         }
     });

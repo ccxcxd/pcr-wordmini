@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>PCR填词游戏/PCR Word Mini Game</title>
+    <title>PCR接龙小游戏/PCR Word Mini Game</title>
     <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -16,10 +16,10 @@
 <body>
     <div class="container">
         <div>
-            设定里可以把词条变暗或者隐藏，也可以点击标题排序来寻找特定词尾、有无设定变暗隐藏等等。<br/>
+            设定里可以把词条变暗、隐藏或高亮（比如标记特殊词尾），也可以点击标题排序来寻找特定词尾、有无设定变暗隐藏等等。<br/>
             弹窗里点击图片会使之在“正常”<->“变暗”之间转换。<br/>
             <br/>
-            In settings, word can be set grey out or hidden. You can also click the title inside to order columns for specific word ending or hidden status, etc.<br/>
+            In settings, word can be set grey out, hidden, or highlight (i.e. to mark special ending). You can also click the title inside to order columns for specific word ending or hidden status, etc.<br/>
             In pop-up window, click the image will move it bewtween "normal" and "grey" states.<br/>
         </div>
         <div>
@@ -41,6 +41,7 @@
                         <h5 class="modal-title" id="img_title"></h5>
                     </div>
                     <div class="modal-body">
+                        <div id="img_holder_highlight"></div>
                         <div id="img_holder"></div>
                         <div id="img_holder_grey"></div>
                     </div>
@@ -60,6 +61,7 @@
                                     <th>词尾/Last</th>
                                     <th>变暗/Grey</th>
                                     <th>隐藏/Hide</th>
+                                    <th>高亮/Highlight</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>

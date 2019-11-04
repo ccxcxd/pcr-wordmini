@@ -6,3 +6,8 @@
 .half-transparent {
   opacity: 0.5;
 }
+
+.pic-highlight {
+  border:5px solid red;
+  background-color: red;
+}
