@@ -44,10 +44,14 @@ function popup(char_id) {
     $.each(word_data, function (index, data) {
         if (data.first === char_id && !load_storage("hide", index, false)) {
             var path = "img/" + data.pic + ".png";
+            var onclick = function () {
+                $("#button_grey" + index).click();
+                popup(char_id);
+            };
             if (load_storage("grey", index, false)) {
-                $("#img_holder_grey").append($("<img>", { src: path, "class": "half-transparent" }));
+                $("#img_holder_grey").append($("<img>", { src: path, "class": "half-transparent" }).click(onclick));
             } else {
-                $("#img_holder").append($("<img>", { src: path }));
+                $("#img_holder").append($("<img>", { src: path }).click(onclick));
             }
         }
     });
