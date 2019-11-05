@@ -17,7 +17,7 @@ $(document).ready(function () {
             $("#char_table").append($("<button>", {"class" : "btn btn-light button-fixedsize"}));
             pre_col++;
         }
-        var display_text = data.hira + '/' + data.kata + '/' + data.roma;
+        var display_text = data.hira + ' ' + data.kata + ' ' + data.roma;
         $("#char_table").append($("<button>", {"class" : "btn btn-primary button-fixedsize"})
             .text(display_text)
             .click(function() { popup(char_id); })
@@ -31,6 +31,7 @@ $(document).ready(function () {
             $("<td>").text(data.word),
             $("<td>").text(data.first),
             $("<td>").text(data.last),
+            $("<td>").text(data.level),
             $("<td>").append(create_check_button("button_grey", index, "grey", false)),
             $("<td>").append(create_check_button("button_hide", index, "hide", false)),
             $("<td>").append(create_check_button("button_highlight", index, "highlight", false)),
@@ -42,7 +43,7 @@ $(document).ready(function () {
     $("#export_btn").click(function () {
         var out_text = "";
         $.each(word_data, function (index, data) {
-            var data_array = [data.id, data.word, data.first, data.last];
+            var data_array = [data.id, data.word, data.first, data.last, data.level];
             data_array.push(load_storage("grey", index, false).toString().toUpperCase());
             data_array.push(load_storage("hide", index, false).toString().toUpperCase());
             data_array.push(load_storage("highlight", index, false).toString().toUpperCase());
@@ -128,6 +129,14 @@ function popup(char_id) {
 // Returns a check mark if val is true, or returns a cross.
 function boolean_to_checkmark(val) {
     return val ? "\u2714" : "\u2716";
+}
+
+// Returns the name of a word level.
+function word_level_string(val) {
+    if (val == 1) return "フツ";
+    if (val == 2) return "ウラ";
+    if (val == 3) return "プリ";
+    return "？？";
 }
 
 // Creates a button that can toggle value and save its value to storage.
