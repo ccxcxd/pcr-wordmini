@@ -61,7 +61,7 @@ $(document).ready(function () {
             if (line_string === "")
                 continue;
             var line = line_string.split(/\t|,/);
-            if (line.length < 7) {
+            if (line.length < 8) {
                 alert("无效数据/Invalid data: " + line_string);
                 return;
             }
@@ -85,9 +85,9 @@ $(document).ready(function () {
                 $("#" + id_prefix + i).prop("data-checked", val);
                 return true;
             };
-            if (!processValue(index, line[4], "button_grey") ||
-                !processValue(index, line[5], "button_hide") ||
-                !processValue(index, line[6], "button_highlight")) {
+            if (!processValue(index, line[5], "button_grey") ||
+                !processValue(index, line[6], "button_hide") ||
+                !processValue(index, line[7], "button_highlight")) {
                 alert("无效数据/Invalid data: " + line_string);
                 return;
             }
